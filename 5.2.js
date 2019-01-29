@@ -21,7 +21,6 @@ function askTvSerie(){
   };
   return serieTv;
 }
-console.log(askTvSerie());
 
 //Créer une fonction qui demander trois question à l'utilisateur
 //serieCasts est un tableau car l'utilisateur peut répondre plusieurs fois à cette question
@@ -30,3 +29,21 @@ console.log(askTvSerie());
 //il faut push les résultats donnés par l'utilisateur dans le tableau prévu.
 //sinon, si il répond 'n' alors arrêter la boucle
 //retourner et afficher le résultat.
+
+function randomizeCast(serieTv) {
+  const serieCastsInRandomOrder = [];
+  while (serieTv.serieCasts.length > 0) {
+    // un chiffre au hasard, mais plus petit que le nombre de personnes dans la liste.
+    const index = Math.floor(Math.random() * Math.floor(serieTv.serieCasts.length));
+    // Ajout de la personne sélectionnée dans la nouvelle liste.
+    serieCastsInRandomOrder.push(serieTv.serieCasts[index]);
+    // Suppression de la personne sélectionnée dans la nouvelle liste.
+    // Elle ne peut plus revenir au prochain tour de boucle.
+    serieTv.serieCasts.splice(index, 1);
+  }
+  return serieCastsInRandomOrder;
+}
+
+const serieTv = askTvSerie();
+const randomList = randomizeCast(serieTv);
+console.log(randomList);
